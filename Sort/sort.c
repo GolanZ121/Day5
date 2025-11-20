@@ -26,9 +26,11 @@
 -------------------------------------------------------*/
 void swap(void **arr, size_t length, int i, int j){
     void * temp = NULL;
-    if(i < 0 || j < 0 || i >= length || j >= length || i == j)
+    if(i < 0 || j < 0 || i >= length || j >= length || i == j || !arr)
         return;
 
+    if(!arr[i] || !arr[j]) return;
+    
     temp = arr[i];
     arr[i] = arr[j];
     arr[j] = temp;
@@ -48,8 +50,8 @@ void swap(void **arr, size_t length, int i, int j){
 *
 * Author - Golan Ziv
 -------------------------------------------------------*/
-void sort(void **arr, size_t length, int (*cmp_ptr)(void *, void *)){
-    if(length < 2) return;
+void sort(void **arr, size_t length, int (*cmp_ptr)(void *, void *)){    
+    if(length < 2 || !arr) return;
 
     for(int i = 0; i < length; i++){
         for(int j = 0; j < length - 1; j++){
