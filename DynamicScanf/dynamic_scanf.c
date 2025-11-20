@@ -20,21 +20,27 @@
 *
 * Author - Golan Ziv
 -------------------------------------------------------*/
-char * dyn_scanf(void){
+char *dyn_scanf(void){
     char *str = NULL, *temp = NULL;
     int c; 
     size_t length = 0; 
+    size_t init_capacity = 1000;
+    
+    str = malloc(init_capacity);
+    if(!str)
+        return NULL;
 
     while((c = getchar()) != EOF && c != '\n' && length < SIZE_MAX - 1){
         length++; // it cant overflow, the max chars are SIZE_MAX - 1 (not including '\0')
-        temp = realloc(str, length);
-
-        if(!temp){ 
-            if (str) free(str);
-            return NULL; // realloc failed
+        if(length > init_capacity){
+            temp = realloc(str, length);
+            if(!temp){ 
+                if (str) free(str);
+                return NULL; // realloc failed
+            }
+            str = temp;
         }
 
-        str = temp;
         str[length - 1] = c;
     }
 
@@ -63,7 +69,7 @@ char * dyn_scanf(void){
 * Author - Golan Ziv
 -------------------------------------------------------*/
 int main(){
-    char * input = NULL;
+    char *input = NULL;
 
     printf("Enter string: ");
 
