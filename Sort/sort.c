@@ -135,7 +135,7 @@ int main(){
     char * arr[ARRAY_SIZE];
     char * temp = NULL;
     for(int i = 0; i < ARRAY_SIZE; i++){
-        printf("enter string %d: ", i);
+        printf("enter string %d: ", i+1);
         temp = dyn_scanf();
         if(!temp){
             printf("scanf failed!");
