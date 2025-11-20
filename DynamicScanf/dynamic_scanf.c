@@ -22,7 +22,7 @@
 -------------------------------------------------------*/
 char * dyn_scanf(void){
     char *str = NULL, *temp = NULL;
-    char c; 
+    int c; 
     size_t length = 0; 
 
     while((c = getchar()) != EOF && c != '\n' && length < SIZE_MAX - 1){
