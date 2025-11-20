@@ -24,7 +24,7 @@
 *
 * Author - Golan
 -------------------------------------------------------*/
-void swap(void **arr, size_t length, int i, int j){
+void swap(void **arr, size_t length, size_t i, size_t j){
     void * temp = NULL;
     if(i < 0 || j < 0 || i >= length || j >= length || i == j || !arr)
         return;
@@ -51,8 +51,7 @@ void swap(void **arr, size_t length, int i, int j){
 * Author - Golan Ziv
 -------------------------------------------------------*/
 void sort(void **arr, size_t length, int (*cmp_ptr)(void *, void *)){    
-    if(length < 2 || !arr) return;
-
+    if(length < 2 || !arr || !cmp_ptr) return;
     for(int i = 0; i < length; i++){
         for(int j = 0; j < length - 1; j++){
             if(cmp_ptr(arr[j] , arr[j+1]) > 0)
@@ -144,6 +143,7 @@ int main(){
             return 1;
         }
         arr[i] = strdup(temp);
+        free(temp);
     }
     
 
@@ -154,6 +154,9 @@ int main(){
     printf("\nSorted in length order:\n");
     sort((void **)arr, ARRAY_SIZE, len_cmp);
     print_arr(arr);
+
+    for(int i = 0; i < ARRAY_SIZE; i++)
+        free(arr[i]);
 
     return 0;
 }
